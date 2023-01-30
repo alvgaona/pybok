@@ -1,9 +1,14 @@
-from pybok.base_decorator import BaseDecorator
-from pybok.decorators import _constructor
+from pybok.base import Base
+from pybok.decorators import _init_fn
 
-class ArgsConstructor(BaseDecorator):
-    def __init__(self, cls) -> None:
-        super().__init__(cls)
+class ArgsConstructor(Base):
+    def decorate(cls, arg):
+        required_args = {}
+        default_args = {}
+        for field, value in cls.fields.items():
+            if value is None:
+                required_args[field] = value
+            else:
+                default_args[field] = value
 
-    def decorate(self):
-        _constructor(self.decorated_class, self.fields)
+        setattr(arg, f'__init__', _init_fn(required_fields=required_args, default_fields=default_args, private=True))

@@ -1,10 +1,7 @@
-from pybok.base_decorator import BaseDecorator
+from pybok.base import Base
 from pybok.decorators import _setter_fn
 
-class Setter(BaseDecorator):
-    def __init__(self, cls) -> None:
-        super().__init__(cls)
-    
-    def decorate(self):
-        for field in self.fields:
-            setattr(self.decorated_class, f'set_{field}', _setter_fn(field))
+class Setter(Base):
+    def decorate(cls, arg):
+        for field in cls.fields:
+            setattr(arg, f'set_{field}', _setter_fn(field))
