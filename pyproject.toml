@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "pybok"
+version = "0.1.0"
+description = "The Python library to remove all the boilerplate from your code — inspired in https://projectlombok.org/ 🔥"
+authors = ["Alvaro <alvgaona@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytest = "^7.2.1"
+ruff = "^0.0.237"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
