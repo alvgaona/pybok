@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+
 
 class Base(ABC):
     fields = {}
@@ -10,11 +10,12 @@ class Base(ABC):
         fields = {}
 
         for field in cls.__annotations__.keys():
+
             if field in cls.__dict__:
                 fields[field] = cls.__dict__[field]
             else:
                 fields[field] = None
-        
+
         return fields
 
     def __new__(cls, arg=None, *args, **kwargs):
@@ -35,8 +36,7 @@ class Base(ABC):
             cls.args = args
             cls.kwargs = kwargs
             return cls
-    
-    
+
     @abstractmethod
     def decorate(cls, arg, **kwargs):
         pass

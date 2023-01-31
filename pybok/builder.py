@@ -1,6 +1,7 @@
 from pybok.base import Base
 from pybok.decorators import _create_fn
 
+
 class Builder(Base):
     @classmethod
     def _builder_set(cls, name):
@@ -12,9 +13,9 @@ class Builder(Base):
 
         for field in klass.fields:
             setattr(arg, field, klass._builder_set(field))
-        
+
         @classmethod
         def build(cls):
             return arg(**arg._fields)
 
-        setattr(arg, 'build', build) 
+        setattr(arg, 'build', build)
