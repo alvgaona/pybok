@@ -60,5 +60,24 @@ def _setter_fn(field):
     return _create_fn(f'set_{field}', f'self, {field}', f'    self._{field} = {field}')
 
 
+def _to_string_fn(fields):
+    args = '+ ","'.join([f'"{name}=" + str(self._{name})' for name in fields])
+    return _create_fn('__repr__', 'self', f'    return type(self).__name__ + "(" + {args} + ")"')
+
+
 def _constructor(cls, required_fields={}, default_fields={}, private=True):
-    setattr(cls, f'__init__', _init_fn(required_fields, default_fields, private=private))
+    setattr(cls, '__init__', _init_fn(required_fields, default_fields, private=private))
+
+
+def _eq_fn():
+    return _create_fn(
+        '__eq__',
+        'self, other',
+        '    return self.__class__ == other.__class__ ' +
+        'and self.__dict__ == other.__dict__'
+    )
+
+
+def _hash_fn(fields):
+    args = ','.join([f'self._{name}' for name in fields])
+    return _create_fn('__hash__', 'self', f'    return hash(({args}))')
