@@ -9,7 +9,7 @@ class Builder(Base):
         return _create_fn(name, 'cls, ' + name, body, decorators=['@classmethod'])
 
     def decorate(klass, arg):
-        setattr(arg, '_fields', {})     
+        setattr(arg, '_fields', {})
 
         for field in klass.fields:
             setattr(arg, field, klass._builder_set(field))
