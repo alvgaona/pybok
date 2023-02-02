@@ -29,6 +29,14 @@ def _no_args_init_fn(fields, private=False):
     return _create_fn('__init__', local_vars, body_txt)
 
 
+def _no_init_fn():
+    return _create_fn(
+        '__init__',
+        'self, *args, **kwargs',
+        '\n    raise NotImplementedError("This is a utility class and cannot be instantiated")'
+    )
+
+
 def _init_fn(required_fields, default_fields={}, private=False):
     body = []
     for f in list(required_fields.keys()) + list(default_fields.keys()):

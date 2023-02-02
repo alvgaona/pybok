@@ -11,7 +11,7 @@ class ConfigurationProperties(Base):
                 cls.fields[field] = arg.__dict__[field]
             elif field not in arg.__dict__ and value is None:
                 raise ValueError(f"{field.upper()} is required.")
-            else:        
+            else:
                 cls.fields[field] = value
-        
+
         _constructor(arg, default_fields=cls.fields)
