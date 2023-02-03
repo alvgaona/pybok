@@ -3,6 +3,10 @@ import logging.config
 import json
 from pybok.base import Base
 
+import os
+
+print()
+
 
 class Config:
     _CONFIG_FILE = 'logger.json'
@@ -11,9 +15,11 @@ class Config:
 
     def __init__(self) -> None:
         if self.config is None:
-            with open(self._CONFIG_FILE, 'r') as f:
-                config = json.load(f)
+            base_path = os.path.abspath(os.getcwd())
 
+            with open(os.path.join(base_path, self._CONFIG_FILE), 'r') as f:
+                config = json.load(f)
+            
             logging.config.dictConfig(config)
 
 
