@@ -14,14 +14,13 @@ class Data(Base):
 
         setattr(arg,
                 '__init__',
-                _init_fn(required_fields=required_args, default_fields=default_args, private=True))
+                _init_fn(arg.__name__, required_fields=required_args, default_fields=default_args, private=True))
 
         for field in cls.fields:
             setattr(arg, f'get_{field}', _getter_fn(field))
             setattr(arg, f'set_{field}', _setter_fn(field))
 
         setattr(arg, '__repr__', _to_string_fn(cls.fields))
-        
+
         setattr(arg, '__eq__', _eq_fn())
         setattr(arg, '__hash__', _hash_fn(cls.fields))
-

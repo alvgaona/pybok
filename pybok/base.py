@@ -3,20 +3,31 @@ from abc import ABC, abstractmethod
 
 class Base(ABC):
     fields = {}
+    super_fields = {}
     kwargs = None
     args = None
 
     def _init_fields(cls):
         fields = {}
+        super_fields = {}
 
-        for field in cls.__annotations__.keys():
+        annotations = cls.__annotations__ if len(cls.__mro__) <= 2 else {k: v for k, v in cls.__annotations__.items()}
 
+        for c in cls.__mro__[1:]:
+            if '__annotations__' in c.__dict__:
+                for field in c.__annotations__.keys():
+                    if field in c.__dict__:
+                        super_fields[field] = c.__dict__[field]
+                    else:
+                        super_fields[field] = None
+
+        for field in annotations.keys():
             if field in cls.__dict__:
                 fields[field] = cls.__dict__[field]
             else:
                 fields[field] = None
 
-        return fields
+        return fields, super_fields
 
     def __new__(cls, arg=None, *args, **kwargs):
         """
@@ -29,7 +40,7 @@ class Base(ABC):
         the decorator arguments.
         """
         if arg is not None:
-            cls.fields = cls._init_fields(arg)
+            cls.fields, cls.super_fields = cls._init_fields(arg)
             cls.decorate(cls, arg)
             return arg
         else:

@@ -5,8 +5,6 @@ from pybok.base import Base
 
 import os
 
-print()
-
 
 class Config:
     _CONFIG_FILE = 'logger.json'
@@ -19,7 +17,7 @@ class Config:
 
             with open(os.path.join(base_path, self._CONFIG_FILE), 'r') as f:
                 config = json.load(f)
-            
+
             logging.config.dictConfig(config)
 
 
@@ -28,4 +26,4 @@ class Log(Base):
         setattr(arg, 'logger', logging.getLogger())
 
 
-config = Config()
+# config = Config()

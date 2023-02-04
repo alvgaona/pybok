@@ -22,7 +22,7 @@ class Singleton(Base):
         Please read the comment in the base method.
         """
         if arg is not None:
-            cls.fields = cls._init_fields(arg)
+            cls.fields, cls.super_fields = cls._init_fields(arg)
 
             new_arg = type(arg.__name__, (BaseSingleton,), dict(arg.__dict__))
             cls.decorate(cls, new_arg)

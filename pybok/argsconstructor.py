@@ -12,4 +12,14 @@ class ArgsConstructor(Base):
             else:
                 default_args[field] = value
 
-        setattr(arg, '__init__', _init_fn(required_fields=required_args, default_fields=default_args, private=True))
+        setattr(
+            arg,
+            '__init__',
+            _init_fn(
+                arg.__name__,
+                required_fields=required_args,
+                default_fields=default_args,
+                super_args=cls.super_fields,
+                private=True
+            )
+        )

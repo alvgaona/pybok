@@ -21,12 +21,12 @@ class TestToJSON(unittest.TestCase):
         }
 
         self.assertEqual(person.json(), json.dumps(expected, indent=4))
-    
+
     def test_nested_json_objects(self):
         @ArgsConstructor
         class Eyes:
             color: str
-        
+
         @ToJSON
         @ArgsConstructor
         class Person:
@@ -50,7 +50,7 @@ class TestToJSON(unittest.TestCase):
         @ArgsConstructor
         class Shirt:
             color: str
-        
+
         @ToJSON
         @ArgsConstructor
         class Person:

@@ -37,14 +37,21 @@ def _no_init_fn():
     )
 
 
-def _init_fn(required_fields, default_fields={}, private=False):
+def _init_fn(cls, required_fields, default_fields={}, super_args={}, private=False):
     body = []
     for f in list(required_fields.keys()) + list(default_fields.keys()):
         if private:
             body.append(f'self._{f} = {f}')
         else:
             body.append(f'self.{f} = {f}')
-    body_txt = "\n".join(f'    {b}' for b in body)
+    
+    """
+    HACK: the next line is just crazy. Needed to get the right class for the super method.
+    The following lines are just standard.
+    """
+    body_txt = f'    this = None\n    for klass in self.__class__.__mro__:\n        if klass.__name__ == "{cls}":\n            this = klass\n'
+    body_txt += f'    super(this, self).__init__({",".join([k for k in super_args])})\n'
+    body_txt += "\n".join(f'    {b}' for b in body)
 
     local_vars = 'self'
 
@@ -56,6 +63,9 @@ def _init_fn(required_fields, default_fields={}, private=False):
             local_vars += f', {k}="{v}"'
         else:
             local_vars += f', {k}={v}'
+
+    for k, v in super_args.items():
+        local_vars += f', {k}'
 
     return _create_fn('__init__', local_vars, body_txt)
 

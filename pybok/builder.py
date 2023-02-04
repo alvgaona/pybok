@@ -7,6 +7,7 @@ class Builder(Base):
     def _builder_set(cls, name):
         body = f'    cls._fields["{name}"] = {name}\n    return cls'
         return _create_fn(name, 'cls, ' + name, body, decorators=['@classmethod'])
+    
 
     def decorate(klass, arg):
         setattr(arg, '_fields', {})
