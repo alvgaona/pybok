@@ -12,9 +12,16 @@ class Data(Base):
             else:
                 default_args[field] = value
 
-        setattr(arg,
-                '__init__',
-                _init_fn(arg.__name__, required_fields=required_args, default_fields=default_args, private=True))
+        setattr(
+            arg,
+            '__init__',
+            _init_fn(
+                arg,
+                required=required_args,
+                default=default_args,
+                private=True
+            )
+        )
 
         for field in cls.fields:
             setattr(arg, f'get_{field}', _getter_fn(field))

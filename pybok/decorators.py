@@ -1,3 +1,7 @@
+from abc import ABC
+import inspect
+
+
 def _create_fn(name, args, body, *, return_type=None, decorators=[]):
     if args is None:
         args = ''
@@ -7,7 +11,9 @@ def _create_fn(name, args, body, *, return_type=None, decorators=[]):
     if decorators:
         decorators += '\n  '
 
-    txt = f'def __create_fn__():\n  {decorators}def {name}({args}) -> {return_type}: \n{body}\n  return {name}'
+    fn_txt = f'\n  {decorators}def {name}({args}) -> {return_type}: \n{body}\n  return {name}'
+
+    txt = f'def __create_fn__():{fn_txt}'
 
     ns = {}
     exec(txt, None, ns)
@@ -37,35 +43,72 @@ def _no_init_fn():
     )
 
 
-def _init_fn(cls, required_fields, default_fields={}, super_args={}, private=False):
+def get_required_default_arguments(args):
+    required = {}
+    default = {}
+    for field, value in args.items():
+        if value is None:
+            required[field] = value
+        else:
+            default[field] = value
+
+    return required, default
+
+
+def _init_fn(cls, required, default={}, super_args={}, private=False):
+    super_class = inspect.getmro(cls)[1]
+    super_base = super_class.__base__
+    super_init_signature = inspect.signature(super_class.__init__)
+
+    super_init_args = ",".join([f"{k}={k}" for k in super_args])
+    if super_base == ABC or str(super_init_signature) == '(self, /, *args, **kwargs)':
+        super_init_args = ""
+
+    """
+    HACK: the next line is just crazy. Needed to get the right class for the
+    super method.
+
+    The following lines are just standard.
+    """
+    body_txt = f'    this = None\n    for klass in self.__class__.__mro__:\n        if klass.__name__ == "{cls.__name__}":\n            this = klass\n'
+    body_txt += f'    super(this, self).__init__({super_init_args})\n'
+
     body = []
-    for f in list(required_fields.keys()) + list(default_fields.keys()):
+    for f in list(required.keys()) + list(default.keys()):
         if private:
             body.append(f'self._{f} = {f}')
         else:
             body.append(f'self.{f} = {f}')
-    
-    """
-    HACK: the next line is just crazy. Needed to get the right class for the super method.
-    The following lines are just standard.
-    """
-    body_txt = f'    this = None\n    for klass in self.__class__.__mro__:\n        if klass.__name__ == "{cls}":\n            this = klass\n'
-    body_txt += f'    super(this, self).__init__({",".join([k for k in super_args])})\n'
+
     body_txt += "\n".join(f'    {b}' for b in body)
 
-    local_vars = 'self'
+    if super_init_args == "" and super_args != {}:
+        for f in super_args:
+            body_txt += f'\n    self._{f} = {f}'
 
-    for k, v in required_fields.items():
+    local_vars = 'self'
+    super_required, super_default = get_required_default_arguments(super_args)
+
+    for k, v in required.items():
         local_vars += f', {k}'
 
-    for k, v in default_fields.items():
+    for k, v in super_required.items():
+        local_vars += f', {k}'
+
+    if default or super_default:
+        local_vars += ', *'
+
+    for k, v in default.items():
         if isinstance(v, str):
             local_vars += f', {k}="{v}"'
         else:
             local_vars += f', {k}={v}'
 
-    for k, v in super_args.items():
-        local_vars += f', {k}'
+    for k, v in super_default.items():
+        if isinstance(v, str):
+            local_vars += f', {k}="{v}"'
+        else:
+            local_vars += f', {k}={v}'
 
     return _create_fn('__init__', local_vars, body_txt)
 

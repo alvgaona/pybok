@@ -1,6 +1,4 @@
 import unittest
-import pytest
-
 from pybok import Builder, ArgsConstructor, Getter, Setter
 
 
@@ -48,7 +46,6 @@ class TestOrder(unittest.TestCase):
         self.assertEqual(person.get_name(), "Jane")
         self.assertEqual(person.get_age(), 19)
 
-    @pytest.mark.skip("@Builder must decorate @ArgsConstructor and not viceversa.")
     def test_order_3(self):
         @ArgsConstructor
         @Builder
