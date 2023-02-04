@@ -1,6 +1,14 @@
 import os
+
+from typing import TypeVar, Generic
 from pybok.base import Base
-from pybok.decorators import _constructor
+from pybok.decorators import _init_fn
+
+T = TypeVar('T')
+
+
+class NotBlank(Generic[T]):
+    pass
 
 
 class ConfigurationProperties(Base):
@@ -14,4 +22,14 @@ class ConfigurationProperties(Base):
             else:
                 cls.fields[field] = value
 
-        _constructor(arg, default_fields=cls.fields)
+        setattr(
+            arg,
+            '__init__',
+            _init_fn(
+                arg,
+                required={},
+                default=cls.fields,
+                super_args=cls.super_fields,
+                private=True
+            )
+        )

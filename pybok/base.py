@@ -1,6 +1,25 @@
 from abc import ABC, abstractmethod
 
 
+class Field:
+    def __init__(self, name, value, type) -> None:
+        self._name,
+        self._value,
+        self._type
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def value(self):
+        return self._value
+
+    @property
+    def type(self):
+        return self._type
+
+
 class Base(ABC):
     fields = {}
     super_fields = {}
