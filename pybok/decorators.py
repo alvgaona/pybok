@@ -11,9 +11,8 @@ def _create_fn(name, args, body, *, return_type=None, decorators=[]):
     if decorators:
         decorators += '\n  '
 
-    fn_txt = f'\n  {decorators}def {name}({args}) -> {return_type}: \n{body}\n  return {name}'
-
-    txt = f'def __create_fn__():{fn_txt}'
+    fn_txt = f'\n  {decorators}def {name}({args}) -> {return_type}: \n{body}'
+    txt = f'def __create_fn__():{fn_txt}\n  return {name}'
 
     ns = {}
     exec(txt, None, ns)
@@ -23,11 +22,11 @@ def _create_fn(name, args, body, *, return_type=None, decorators=[]):
 
 def _no_args_init_fn(fields, private=False):
     body = []
-    for f in fields:
+    for f, v in fields.items():
         if private:
-            body.append(f'self._{f} = None')
+            body.append(f'self._{f} = {v}')
         else:
-            body.append(f'self.{f} = None')
+            body.append(f'self.{f} = {v}')
     body_txt = "\n".join(f'    {b}' for b in body)
 
     local_vars = 'self'
@@ -124,10 +123,6 @@ def _setter_fn(field):
 def _to_string_fn(fields):
     args = '+ ","'.join([f'"{name}=" + str(self._{name})' for name in fields])
     return _create_fn('__repr__', 'self', f'    return type(self).__name__ + "(" + {args} + ")"')
-
-
-def _constructor(cls, required_fields={}, default_fields={}, private=True):
-    setattr(cls, '__init__', _init_fn(required_fields, default_fields, private=private))
 
 
 def _eq_fn():

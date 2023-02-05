@@ -13,7 +13,7 @@ class TestOrder(unittest.TestCase):
             name: str
             age: int
 
-        person = Person.name("John").age(23).build()
+        person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual(person.get_name(), "John")
@@ -34,7 +34,7 @@ class TestOrder(unittest.TestCase):
             name: str
             age: int
 
-        person = Person.name("John").age(23).build()
+        person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual(person.get_name(), "John")
@@ -53,7 +53,7 @@ class TestOrder(unittest.TestCase):
             name: str
             age: int
 
-        person = Person.name("John").age(23).build()
+        person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual(person._name, "John")

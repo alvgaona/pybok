@@ -13,7 +13,7 @@ class TestBuilder(unittest.TestCase):
             name: str
             age: int
 
-        person = Person.name("John").age(23).build()
+        person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual(person._name, "John")
@@ -26,7 +26,12 @@ class TestBuilder(unittest.TestCase):
             name: str
             age: int = 23
 
-        person = Person.name("John").build()
+        person_builder = Person.builder().name("John")
+
+        self.assertEqual(person_builder._name, "John")
+        self.assertEqual(person_builder._age, 23)
+
+        person = person_builder.build()
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual(person._name, "John")
@@ -40,9 +45,9 @@ class TestBuilder(unittest.TestCase):
             age: int
 
         with pytest.raises(TypeError) as e:
-            Person.age(23).build()
+            Person.builder().age(23).build()
 
-        self.assertEqual(str(e.value), "__init__() missing 1 required positional argument: 'name'")
+        self.assertEqual(str(e.value), "__init__() missing required positional argument: 'name'")
 
 
 if __name__ == '__main__':

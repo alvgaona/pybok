@@ -37,7 +37,7 @@ class TestConfigurationProperties(unittest.TestCase):
         self.assertEqual(myprops._day, "1")
         self.assertEqual(myprops._month, "10")
         self.assertEqual(myprops._year, "1991")
-    
+
     def test_optional_values(self):
         os.environ[self.DAY] = "1"
         os.environ[self.MONTH] = "10"
