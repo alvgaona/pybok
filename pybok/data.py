@@ -1,5 +1,6 @@
 from pybok.base import Base
-from pybok.decorators import _init_fn, _getter_fn, _to_string_fn, _eq_fn, _hash_fn, _setter_fn
+from pybok.decorators import _init_fn, _to_string_fn, _eq_fn, _hash_fn
+from pybok.property import Property
 
 
 class Data(Base):
@@ -24,8 +25,8 @@ class Data(Base):
         )
 
         for field in cls.fields:
-            setattr(arg, f'get_{field}', _getter_fn(field))
-            setattr(arg, f'set_{field}', _setter_fn(field))
+            setattr(arg, field, Property())
+            arg.__dict__[field].__set_name__(field)
 
         setattr(arg, '__repr__', _to_string_fn(cls.fields))
 

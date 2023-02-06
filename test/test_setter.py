@@ -1,11 +1,12 @@
 import unittest
 
-from pybok import Setter, ArgsConstructor
+from pybok import Getter, Setter, ArgsConstructor
 
 
 class TestSetter(unittest.TestCase):
 
     def test_methods(self):
+        @Getter
         @Setter
         @ArgsConstructor
         class Person:
@@ -14,8 +15,8 @@ class TestSetter(unittest.TestCase):
 
         person = Person("John", 21)
 
-        person.set_name("Jane")
-        person.set_age(19)
+        person.name = "Jane"
+        person.age = 19
 
         self.assertEqual(person._name, "Jane")
         self.assertEqual(person._age, 19)

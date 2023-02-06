@@ -37,8 +37,8 @@ class Student:
 
 student = Student("John", 21)
 
-print(student.get_name()) # John
-print(student.get_age()) # 21
+print(student.name) # John
+print(student.age) # 21
 ```
 
 ### Setter
@@ -52,8 +52,8 @@ class Student:
 
 student = Student("John", 21)
 
-student.set_name("Jane")
-student.get_age(19)
+student.name = "Jane"
+student.age = 19
 
 print(student._name("Jane")) # Jane
 print(student._age_(19)) # 19
@@ -71,13 +71,13 @@ p1 = Person("John", 21)
 
 print(p1) # 'Person(name=John,age=21)'
 
-print(p1.get_name()) # John
-print(p1.get_age()) # 21
+print(p1.name) # John
+print(p1.age) # 21
 
 print((hash(p1), hash((p1._name, p1._age))) # True
 
-p1.set_name("Mike")
-p1.set_age(28)
+p1.name = "Mike"
+p1.age = 28
 
 print(p1._name) # Mike
 print(p1.get_age()) # 28
@@ -92,7 +92,7 @@ class Person:
     name: str
     age: int
 
-person = Person.name("John").age(23).build()
+person = Person.builder().name("John").age(23).build()
 
 print(person._name) # John
 print(person._age # 23

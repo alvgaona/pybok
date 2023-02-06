@@ -2,7 +2,7 @@ from abc import ABC
 import inspect
 
 
-def _create_fn(name, args, body, *, return_type=None, decorators=[]):
+def _create_fn(name, args, body, *, return_type=None, decorators=[], locals={}, globals={}):
     if args is None:
         args = ''
 
@@ -15,7 +15,11 @@ def _create_fn(name, args, body, *, return_type=None, decorators=[]):
     txt = f'def __create_fn__():{fn_txt}\n  return {name}'
 
     ns = {}
-    exec(txt, None, ns)
+
+    if locals != {}:
+        ns |= locals
+
+    exec(txt, globals, ns)
 
     return ns['__create_fn__']()
 
@@ -113,11 +117,8 @@ def _init_fn(cls, required, default={}, super_args={}, private=False):
 
 
 def _getter_fn(field):
-    return _create_fn(f'get_{field}', 'self', f'    return self._{field}')
+    return _create_fn(f'{field}', 'self', f'    return self._{field}', decorators=['@property'])
 
-
-def _setter_fn(field):
-    return _create_fn(f'set_{field}', f'self, {field}', f'    self._{field} = {field}')
 
 
 def _to_string_fn(fields):

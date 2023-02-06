@@ -14,8 +14,8 @@ class TestGetter(unittest.TestCase):
 
         person = Person("John", 21)
 
-        self.assertEqual(person.get_name(), "John")
-        self.assertEqual(person.get_age(), 21)
+        self.assertEqual(person.name, "John")
+        self.assertEqual(person.age, 21)
 
 
 if __name__ == '__main__':

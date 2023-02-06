@@ -5,7 +5,6 @@ from pybok.decorators import _init_fn, get_required_default_arguments
 class ArgsConstructor(Base):
     def decorate(cls, arg):
         required, default = get_required_default_arguments(cls.fields)
-
         setattr(
             arg,
             '__init__',

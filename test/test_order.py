@@ -16,14 +16,14 @@ class TestOrder(unittest.TestCase):
         person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
-        self.assertEqual(person.get_name(), "John")
-        self.assertEqual(person.get_age(), 23)
+        self.assertEqual(person.name, "John")
+        self.assertEqual(person.age, 23)
 
-        person.set_name("Jane")
-        person.set_age(19)
+        person.name = "Jane"
+        person.age = 19
 
-        self.assertEqual(person.get_name(), "Jane")
-        self.assertEqual(person.get_age(), 19)
+        self.assertEqual(person.name, "Jane")
+        self.assertEqual(person.age, 19)
 
     def test_order_2(self):
         @Builder
@@ -37,14 +37,14 @@ class TestOrder(unittest.TestCase):
         person = Person.builder().name("John").age(23).build()
 
         self.assertTrue(isinstance(person, Person))
-        self.assertEqual(person.get_name(), "John")
-        self.assertEqual(person.get_age(), 23)
+        self.assertEqual(person.name, "John")
+        self.assertEqual(person.age, 23)
 
-        person.set_name("Jane")
-        person.set_age(19)
+        person.name = "Jane"
+        person.age = 19
 
-        self.assertEqual(person.get_name(), "Jane")
-        self.assertEqual(person.get_age(), 19)
+        self.assertEqual(person.name, "Jane")
+        self.assertEqual(person.age, 19)
 
     def test_order_3(self):
         @ArgsConstructor

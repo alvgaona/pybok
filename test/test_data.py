@@ -15,8 +15,8 @@ class TestData(unittest.TestCase):
 
         self.assertEqual(str(p1), 'Person(name=John,age=21)')
 
-        self.assertEqual(p1.get_name(), "John")
-        self.assertEqual(p1.get_age(), 21)
+        self.assertEqual(p1.name, "John")
+        self.assertEqual(p1.age, 21)
 
         self.assertEqual(hash(p1), hash((p1._name, p1._age)))
 
@@ -25,8 +25,8 @@ class TestData(unittest.TestCase):
         self.assertNotEqual(p1, p2)
         self.assertEqual(p1, p1)
 
-        p1.set_name("Mike")
-        p1.set_age(28)
+        p1.name = "Mike"
+        p1.age = 28
 
         self.assertEqual(p1._name, "Mike")
         self.assertEqual(p1._age, 28)

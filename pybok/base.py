@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from pybok.property import Property
 
 
 class Field:
@@ -35,13 +36,13 @@ class Base(ABC):
         for c in cls.__mro__[1:]:
             if '__annotations__' in c.__dict__:
                 for field in c.__annotations__.keys():
-                    if field in c.__dict__:
+                    if field in c.__dict__ and not isinstance(c.__dict__[field], Property):
                         super_fields[field] = c.__dict__[field]
                     else:
                         super_fields[field] = None
 
         for field in annotations.keys():
-            if field in cls.__dict__:
+            if field in cls.__dict__ and not isinstance(cls.__dict__[field], Property):
                 fields[field] = cls.__dict__[field]
             else:
                 fields[field] = None
