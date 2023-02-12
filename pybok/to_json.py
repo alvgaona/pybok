@@ -1,5 +1,4 @@
 import re
-
 from json import dumps
 
 from pybok.base import Base
@@ -16,11 +15,7 @@ def remove_prefix(attributes):
 
 class ToJSON(Base):
     def json(self):
-        return dumps(
-            remove_prefix(self.__dict__),
-            default=lambda o: remove_prefix(o.__dict__),
-            indent=4
-        )
+        return dumps(remove_prefix(self.__dict__), default=lambda o: remove_prefix(o.__dict__), indent=4)
 
     def decorate(cls, arg):
         setattr(arg, 'json', cls.json)

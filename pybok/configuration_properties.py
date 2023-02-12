@@ -1,8 +1,9 @@
 import os
+from typing import Generic, TypeVar
 
-from typing import TypeVar, Generic
 from pybok.base import Base
 from pybok.decorators import _init_fn
+
 
 T = TypeVar('T')
 
@@ -23,13 +24,5 @@ class ConfigurationProperties(Base):
                 cls.fields[field] = value
 
         setattr(
-            arg,
-            '__init__',
-            _init_fn(
-                arg,
-                required={},
-                default=cls.fields,
-                super_args=cls.super_fields,
-                private=True
-            )
+            arg, '__init__', _init_fn(arg, required={}, default=cls.fields, super_args=cls.super_fields, private=True)
         )

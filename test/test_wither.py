@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import With, ArgsConstructor
+from pybok import ArgsConstructor, With
 
 
 class TestWith(unittest.TestCase):

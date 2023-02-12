@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import Copy, ArgsConstructor
+from pybok import ArgsConstructor, Copy
 
 
 class TestCopy(unittest.TestCase):

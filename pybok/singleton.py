@@ -15,7 +15,6 @@ class BaseSingleton(metaclass=Instances):
 
 
 class Singleton(Base):
-
     def __new__(cls, arg=None, *args, **kwargs):
         """
         NOTE: it's a redefinition of the method in the Base class.

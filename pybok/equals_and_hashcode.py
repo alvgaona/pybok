@@ -1,5 +1,5 @@
 from pybok.base import Base
-from pybok.decorators import _hash_fn, _eq_fn
+from pybok.decorators import _eq_fn, _hash_fn
 
 
 class EqualsAndHashCode(Base):

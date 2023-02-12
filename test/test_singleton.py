@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import Singleton, ArgsConstructor
+from pybok import ArgsConstructor, Singleton
 
 
 class TestSingleton(unittest.TestCase):

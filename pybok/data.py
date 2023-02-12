@@ -1,5 +1,5 @@
 from pybok.base import Base
-from pybok.decorators import _init_fn, _to_string_fn, _eq_fn, _hash_fn
+from pybok.decorators import _eq_fn, _hash_fn, _init_fn, _to_string_fn
 from pybok.property import Property
 
 
@@ -13,16 +13,7 @@ class Data(Base):
             else:
                 default_args[field] = value
 
-        setattr(
-            arg,
-            '__init__',
-            _init_fn(
-                arg,
-                required=required_args,
-                default=default_args,
-                private=True
-            )
-        )
+        setattr(arg, '__init__', _init_fn(arg, required=required_args, default=default_args, private=True))
 
         for field in cls.fields:
             setattr(arg, field, Property())

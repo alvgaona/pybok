@@ -1,6 +1,19 @@
 import unittest
+
 import pytest
-from pybok import Builder, ArgsConstructor, Getter, Setter, Data, Singleton, With, ToJSON, ToString, Copy
+
+from pybok import (
+    ArgsConstructor,
+    Builder,
+    Copy,
+    Data,
+    Getter,
+    Setter,
+    Singleton,
+    ToJSON,
+    ToString,
+    With,
+)
 
 
 class TestOrder(unittest.TestCase):

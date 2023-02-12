@@ -1,7 +1,7 @@
-import unittest
 import json
+import unittest
 
-from pybok import ToJSON, ArgsConstructor
+from pybok import ArgsConstructor, ToJSON
 
 
 class TestToJSON(unittest.TestCase):

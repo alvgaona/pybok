@@ -1,9 +1,9 @@
+import json
 import logging
 import logging.config
-import json
-from pybok.base import Base
-
 import os
+
+from pybok.base import Base
 
 
 class Config:

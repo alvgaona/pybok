@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import Getter, Setter, ArgsConstructor
+from pybok import ArgsConstructor, Getter, Setter
 
 
 class TestSetter(unittest.TestCase):

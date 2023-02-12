@@ -1,9 +1,8 @@
+import re
+from inspect import Parameter, signature
+
 from pybok.base import Base
 from pybok.decorators import _create_fn, _no_args_init_fn
-
-from inspect import signature, Parameter
-
-import re
 
 
 def _create_cls(name, parents=""):

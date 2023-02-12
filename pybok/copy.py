@@ -1,4 +1,5 @@
 from copy import copy, deepcopy
+
 from pybok.base import Base
 
 

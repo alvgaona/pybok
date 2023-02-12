@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from pybok.property import Property
 
 
@@ -31,7 +32,7 @@ class Base(ABC):
         fields = {}
         super_fields = {}
 
-        annotations = cls.__annotations__ if len(cls.__mro__) <= 2 else {k: v for k, v in cls.__annotations__.items()}
+        annotations = cls.__annotations__ if len(cls.__mro__) <= 2 else { k: v for k, v in cls.__annotations__.items() }
 
         for c in cls.__mro__[1:]:
             if '__annotations__' in c.__dict__:

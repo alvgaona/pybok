@@ -14,8 +14,4 @@ def _with_fn(fields, field):
 class With(Base):
     def decorate(cls, arg):
         for field in cls.fields:
-            setattr(
-                arg,
-                f'with_{field}',
-                _with_fn(cls.fields, field)
-            )
+            setattr(arg, f'with_{field}', _with_fn(cls.fields, field))

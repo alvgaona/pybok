@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import EqualsAndHashCode, ArgsConstructor
+from pybok import ArgsConstructor, EqualsAndHashCode
 
 
 class TestEqualsAndHashCode(unittest.TestCase):

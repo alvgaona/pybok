@@ -1,7 +1,7 @@
-import unittest
 import os
-import pytest
+import unittest
 
+import pytest
 
 from pybok import ConfigurationProperties, Singleton
 

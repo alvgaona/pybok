@@ -1,7 +1,8 @@
 import unittest
+
 import pytest
 
-from pybok import Builder, ArgsConstructor
+from pybok import ArgsConstructor, Builder
 
 
 class TestBuilder(unittest.TestCase):

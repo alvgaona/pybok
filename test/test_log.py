@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import Log, ArgsConstructor
+from pybok import ArgsConstructor, Log
 
 
 class TestLog(unittest.TestCase):

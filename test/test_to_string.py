@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import ToString, ArgsConstructor
+from pybok import ArgsConstructor, ToString
 
 
 class TestToString(unittest.TestCase):

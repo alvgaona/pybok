@@ -1,17 +1,8 @@
-from abc import ABC
 import inspect
+from abc import ABC
 
 
-def _create_fn(
-    name,
-    args,
-    body,
-    *,
-    return_type=None,
-    decorators=[],
-    locals={},
-    globals={}
-):
+def _create_fn(name, args, body, *, return_type=None, decorators=[], locals={}, globals={}):
     if args is None:
         args = ''
 
@@ -75,7 +66,6 @@ def _init_fn(cls, required, default={}, super_args={}, private=False):
     super_init_args = ",".join([f"{k}={k}" for k in super_args])
     if (super_base == ABC or str(super_init_signature) == '(self, /, *args, **kwargs)'):
         super_init_args = ""
-
     """
     HACK: the next line is just crazy. Needed to get the right class for the
     super method.
@@ -139,8 +129,7 @@ def _eq_fn():
     return _create_fn(
         '__eq__',
         'self, other',
-        '    return self.__class__ == other.__class__ ' +
-        'and self.__dict__ == other.__dict__'
+        '    return self.__class__ == other.__class__ ' + 'and self.__dict__ == other.__dict__'
     )
 
 

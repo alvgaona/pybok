@@ -8,11 +8,5 @@ class ArgsConstructor(Base):
         setattr(
             arg,
             '__init__',
-            _init_fn(
-                arg,
-                required=required,
-                default=default,
-                super_args=cls.super_fields,
-                private=True
-            )
+            _init_fn(arg, required=required, default=default, super_args=cls.super_fields, private=True)
         )

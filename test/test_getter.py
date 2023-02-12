@@ -1,6 +1,6 @@
 import unittest
 
-from pybok import Getter, ArgsConstructor
+from pybok import ArgsConstructor, Getter
 
 
 class TestGetter(unittest.TestCase):

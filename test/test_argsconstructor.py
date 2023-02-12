@@ -1,10 +1,10 @@
 import unittest
+from abc import ABC, abstractmethod
+from inspect import signature
+
 import pytest
 
 from pybok.argsconstructor import ArgsConstructor
-
-from inspect import signature
-from abc import ABC, abstractmethod
 
 
 class TestArgsConstructor(unittest.TestCase):
