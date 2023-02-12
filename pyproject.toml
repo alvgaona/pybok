@@ -28,7 +28,6 @@ yapf = "^0.32.0"
 toml = "^0.10.2"
 isort = "^5.12.0"
 
-
 [tool.ruff]
 # Enable Pyflakes `E` and `F` codes by default.
 select = ["E", "F"]
