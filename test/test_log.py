@@ -1,5 +1,4 @@
 import unittest
-import pytest
 
 from pybok import Log, ArgsConstructor
 

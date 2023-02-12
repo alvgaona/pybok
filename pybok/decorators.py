@@ -2,7 +2,16 @@ from abc import ABC
 import inspect
 
 
-def _create_fn(name, args, body, *, return_type=None, decorators=[], locals={}, globals={}):
+def _create_fn(
+    name,
+    args,
+    body,
+    *,
+    return_type=None,
+    decorators=[],
+    locals={},
+    globals={}
+):
     if args is None:
         args = ''
 
@@ -64,7 +73,7 @@ def _init_fn(cls, required, default={}, super_args={}, private=False):
     super_init_signature = inspect.signature(super_class.__init__)
 
     super_init_args = ",".join([f"{k}={k}" for k in super_args])
-    if super_base == ABC or str(super_init_signature) == '(self, /, *args, **kwargs)':
+    if (super_base == ABC or str(super_init_signature) == '(self, /, *args, **kwargs)'):
         super_init_args = ""
 
     """
@@ -73,7 +82,8 @@ def _init_fn(cls, required, default={}, super_args={}, private=False):
 
     The following lines are just standard.
     """
-    body_txt = f'    this = None\n    for klass in self.__class__.__mro__:\n        if klass.__name__ == "{cls.__name__}":\n            this = klass\n'
+    body_txt = '    this = None\n    for klass in self.__class__.__mro__:\n   ' + \
+        f'     if klass.__name__ == "{cls.__name__}":\n            this = klass\n'
     body_txt += f'    super(this, self).__init__({super_init_args})\n'
 
     body = []
@@ -118,7 +128,6 @@ def _init_fn(cls, required, default={}, super_args={}, private=False):
 
 def _getter_fn(field):
     return _create_fn(f'{field}', 'self', f'    return self._{field}', decorators=['@property'])
-
 
 
 def _to_string_fn(fields):
