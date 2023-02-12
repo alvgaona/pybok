@@ -18,10 +18,6 @@ jobs:
     - name: Install Poetry
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python
-
-    - name: Start poetry shell
-      run: |
-        poetry shell
     
     - name: Install dependencies
       run: |
@@ -29,12 +25,12 @@ jobs:
     
     - name: Run ruff
       run: |
-        ruff check .
+        poetry run ruff check .
 
     - name: Run yapf
       run: |
-        yapf pybok -r -q
+        poetry run yapf pybok -r -q
     
     - name: Run isort
       run: |
-        isort .
+        poetry run isort .
