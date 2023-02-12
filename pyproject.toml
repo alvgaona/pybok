@@ -1,23 +1,33 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "pybok"
-version = "0.1.0"
+version = "0.0.1"
 description = "The Python library to remove all the boilerplate from your code — inspired in https://projectlombok.org/ 🔥"
-authors = ["Alvaro <alvgaona@gmail.com>"]
-license = "MIT"
+authors = [
+  "Alvaro J. Gaona <alvgaona@gmail.com>",
+]
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/alvgaona/pybok"
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+
+[tool.poetry.dev-dependencies]
 pytest = "^7.2.1"
 ruff = "^0.0.237"
 yapf = "^0.32.0"
 toml = "^0.10.2"
 isort = "^5.12.0"
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 # Enable Pyflakes `E` and `F` codes by default.
