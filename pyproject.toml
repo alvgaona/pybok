@@ -10,8 +10,124 @@ readme = "README.md"
 python = "^3.9"
 pytest = "^7.2.1"
 ruff = "^0.0.237"
+yapf = "^0.32.0"
+toml = "^0.10.2"
+isort = "^5.12.0"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F"]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+per-file-ignores = {}
+
+# Same as Black.
+line-length = 120
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.9.
+target-version = "py39"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
+
+[tool.isort]
+profile = "hug"
+src_paths = "*"
+lines_after_imports = 2
+honor_noqa = "True"
+lines_between_sections = 1
+
+[tool.yapf]
+based_on_style = "pep8"
+align_closing_bracket_with_visual_indent = "False"
+allow_multiline_dictionary_keys = "False"
+allow_multiline_lambdas = "False"
+allow_split_before_default_or_named_assigns = "False"
+allow_split_before_dict_value = "False"
+arithmetic_precedence_indication = "True"
+blank_lines_around_top_level_definition = 2
+blank_line_before_class_docstring = "False"
+blank_line_before_module_docstring = "False"
+blank_line_before_nested_class_or_def = "False"
+blank_lines_between_top_level_imports_and_variables = 2
+coalesce_brackets = "False"
+column_limit = 120
+continuation_align_style = "SPACE"
+continuation_indent_width = 4
+dedent_closing_brackets = "True"
+disable_ending_comma_heuristic = "False"
+each_dict_entry_on_separate_line = "True"
+force_multiline_dict = "False"
+# i18n_comment =
+# i18n_function_call = 
+indent_dictionary_value = "True"
+indent_width = 4
+indent_closing_brackets = "False"
+join_multiple_lines = "True"
+no_spaces_around_selected_binary_operators = "True"
+spaces_around_power_operator = "False"
+spaces_around_default_or_named_assign = "False"
+spaces_around_dict_delimiters = "True"
+spaces_around_list_delimiters = "False"
+spaces_around_tuple_delimiters = "False"
+spaces_before_comment = [15, 20]
+space_between_ending_comma_and_closing_bracket = "False"
+space_inside_brackets = "False"   
+split_arguments_when_comma_terminated = "True"
+split_all_comma_separated_values = "False"
+split_all_top_level_comma_separated_values = "True"
+split_before_bitwise_operator = "False"
+split_before_arithmetic_operator = "False"
+split_before_closing_bracket = "False"
+split_before_dict_set_generator = "False"
+split_before_dot = "False"
+split_before_expression_after_opening_paren = "False"
+split_before_first_argument = "True"
+split_before_logical_operator = "False"
+split_before_named_assigns = "True"
+split_complex_comprehension = "True"
+split_penalty_after_opening_bracket = 30
+split_penalty_after_unary_operator = 10000
+split_penalty_before_if_expr = 0
+split_penalty_bitwise_operator = 300
+split_penalty_comprehension = 80
+split_penalty_excess_character = 4500
+split_penalty_for_added_line_split = 30
+split_penalty_import_names = 0
+split_penalty_logical_operator = 300
+use_tabs = "False"
