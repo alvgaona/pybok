@@ -19,9 +19,13 @@ jobs:
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python
 
+    - name: Start poetry shell
+      run: |
+        poetry shell
+    
     - name: Install dependencies
       run: |
-        poetry install --no-dev
+        poetry install --no-dev 
     
     - name: Run ruff
       run: |
